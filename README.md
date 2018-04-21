@@ -19,6 +19,8 @@ where `$relative_path` is optional and represent a saved query performed earlier
 ### usage 
 ```
 <?php 
+
+require_once __DIR__ . '/../vendor/autoload.php';
 use PhpQuery\PhpQuery
 
 $page=file_get_contents('sample.html');
