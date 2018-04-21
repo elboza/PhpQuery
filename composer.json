@@ -1,0 +1,17 @@
+{
+    "name": "phpquery/phpquery",
+    "description": "jquery for php",
+    "license": "Beerware",
+    "authors": [
+        {
+            "name": "Fernando Iazeolla",
+            "email": "fernando.iazeolla@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload":{
+        "psr-4":{
+            "PhpQuery\\":"src/"
+        }
+    }
+}
