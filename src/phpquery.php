@@ -77,7 +77,7 @@ class PhpQuery{
 		libxml_use_internal_errors($internalErrors);
 		$this->xpath = new \DOMXPath($this->doc);
 		//libxml_use_internal_errors($internalErrors);
-		//echo $doc->saveHTML();
+		//echo $doc->saveHTML(); 
 	}
 	private function free(){
 		$xpath=null;
