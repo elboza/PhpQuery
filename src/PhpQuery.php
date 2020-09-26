@@ -54,7 +54,7 @@ class PhpQuery{
 		$arr=array();
 		if(empty($class)) return '';
 		foreach($class as $a){
-			array_push($arr,"contains(@class,\"{$a}\")");
+			array_push($arr,"contains(concat(' ', normalize-space(@class), ' '), ' ${a} ')");
 		}
 		return "[" . implode(" and ",$arr) . "]";
 	}
