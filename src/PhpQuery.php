@@ -24,7 +24,7 @@ class PhpQuery{
 		return '';
 	}
 	private function get_classes($str){
-		if(preg_match_all('/(?<=\.)\w+/',$str,$matches)){
+		if(preg_match_all('/(?<=\.)[\w-]+/',$str,$matches)){
 			return $matches[0];
 		}
 		return array();
@@ -99,5 +99,23 @@ class PhpQuery{
 	public function xpath($str,$relative_node=null){
 		return $this->xpath->query($str,$relative_node);
 	}
+	public function innerHTML($element)
+	{ 
+		if(!$element) return'';
+		$innerHTML = ""; 
+		$children  = $element->childNodes;
+
+		foreach ($children as $child) 
+		{ 
+			$innerHTML .= $element->ownerDocument->saveHTML($child);
+		}
+
+		return $innerHTML; 
+	} 
+	public function outerHTML($element)
+	{ 
+		if(!$element) return'';
+		return $element->ownerDocument->saveHTML($element); 
+	} 
 }
 ?>

@@ -9,9 +9,12 @@ you can use it also to make queries with the _xpath_ syntax
 ### public functions
 
 ```
-query($query_string,$relative_path);
-xpath($query_string,$relative_path);
+load_str($html_string);
+query($query_string,$relative_path); // returns DOMNodeList or DOMElement
+xpath($query_string,$relative_path); // returns DOMNodeList or DOMElement
 j_to_x($query_string);
+innerHTML(DOMElement); // returns string
+outerHTML(DOMElement); //return string
 ```
 
 where `$relative_path` is optional and represent a saved query performed earlier.
@@ -45,7 +48,9 @@ $pq->query(...);
 <p id="myid">Hello</p>
 <div class="c1"> hello again</div>
 <div class="c2"> hi</div>
-<div class="c1 c2 c3">ciao</div>
+<div class="c1 c2 c3">hi hi</div>
+<div class="dav-k">foo</div>
+<div class="Opin"><p>bar</p></div>
 <ul>
 <li> one</li>
 <li> two</li>
@@ -61,7 +66,7 @@ phpquery test:
 require_once __DIR__ . '/../vendor/autoload.php';
 use PhpQuery\PhpQuery;
 
-echo "ciao<br>";
+echo "hi<br>";
 $page=file_get_contents('sample.html');
 $pq=new PhpQuery;
 $pq->load_str($page);
@@ -124,13 +129,19 @@ echo "<br><br>";
 //from xpath syntax
 var_dump($pq->xpath('//*[@id="myid"]')[0]);
 
+echo '<br><br>';
+var_dump($pq->innerHTML($pq->query('.Opin')[0]));
+
+echo '<br><br>';
+var_dump($pq->outerHTML($pq->query('.dav-k')[0]));
+
 ?>
 ```
 
 the output:
 
 ```
-ciao
+hi
 
 
 object(DOMNodeList)#6 (1) { ["length"]=> int(2) } 
@@ -139,7 +150,7 @@ object(DOMElement)#6 (18) { ["tagName"]=> string(3) "div" ["schemaTypeInfo"]=> N
 
 object(DOMNodeList)#4 (1) { ["length"]=> int(1) } 
 
-object(DOMElement)#4 (18) { ["tagName"]=> string(3) "div" ["schemaTypeInfo"]=> NULL ["nodeName"]=> string(3) "div" ["nodeValue"]=> string(4) "ciao" ["nodeType"]=> int(1) ["parentNode"]=> string(22) "(object value omitted)" ["childNodes"]=> string(22) "(object value omitted)" ["firstChild"]=> string(22) "(object value omitted)" ["lastChild"]=> string(22) "(object value omitted)" ["previousSibling"]=> string(22) "(object value omitted)" ["nextSibling"]=> string(22) "(object value omitted)" ["attributes"]=> string(22) "(object value omitted)" ["ownerDocument"]=> string(22) "(object value omitted)" ["namespaceURI"]=> NULL ["prefix"]=> string(0) "" ["localName"]=> string(3) "div" ["baseURI"]=> NULL ["textContent"]=> string(4) "ciao" } 
+object(DOMElement)#4 (18) { ["tagName"]=> string(3) "div" ["schemaTypeInfo"]=> NULL ["nodeName"]=> string(3) "div" ["nodeValue"]=> string(4) "hi" ["nodeType"]=> int(1) ["parentNode"]=> string(22) "(object value omitted)" ["childNodes"]=> string(22) "(object value omitted)" ["firstChild"]=> string(22) "(object value omitted)" ["lastChild"]=> string(22) "(object value omitted)" ["previousSibling"]=> string(22) "(object value omitted)" ["nextSibling"]=> string(22) "(object value omitted)" ["attributes"]=> string(22) "(object value omitted)" ["ownerDocument"]=> string(22) "(object value omitted)" ["namespaceURI"]=> NULL ["prefix"]=> string(0) "" ["localName"]=> string(3) "div" ["baseURI"]=> NULL ["textContent"]=> string(4) "hi" } 
 
 object(DOMNodeList)#7 (1) { ["length"]=> int(3) } 
 
@@ -157,5 +168,9 @@ object(DOMElement)#5 (18) { ["tagName"]=> string(1) "p" ["schemaTypeInfo"]=> NUL
 object(DOMNodeList)#7 (1) { ["length"]=> int(1) } 
 
 object(DOMElement)#7 (18) { ["tagName"]=> string(1) "p" ["schemaTypeInfo"]=> NULL ["nodeName"]=> string(1) "p" ["nodeValue"]=> string(5) "Hello" ["nodeType"]=> int(1) ["parentNode"]=> string(22) "(object value omitted)" ["childNodes"]=> string(22) "(object value omitted)" ["firstChild"]=> string(22) "(object value omitted)" ["lastChild"]=> string(22) "(object value omitted)" ["previousSibling"]=> string(22) "(object value omitted)" ["nextSibling"]=> string(22) "(object value omitted)" ["attributes"]=> string(22) "(object value omitted)" ["ownerDocument"]=> string(22) "(object value omitted)" ["namespaceURI"]=> NULL ["prefix"]=> string(0) "" ["localName"]=> string(1) "p" ["baseURI"]=> NULL ["textContent"]=> string(5) "Hello" }
+
+string(10) "<p>bar</p>"
+
+string(28) "<div class="dav-k">foo</div>"
 ```
 

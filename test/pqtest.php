@@ -3,7 +3,7 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 use PhpQuery\PhpQuery;
 
-echo "ciao<br>";
+echo "hi<br>";
 $page=file_get_contents('sample.html');
 $pq=new PhpQuery;
 $pq->load_str($page);
@@ -66,4 +66,9 @@ echo "<br><br>";
 //from xpath syntax
 var_dump($pq->xpath('//*[@id="myid"]')[0]);
 
+echo '<br><br>';
+var_dump($pq->innerHTML($pq->query('.Opin')[0]));
+
+echo '<br><br>';
+var_dump($pq->outerHTML($pq->query('.dav-k')[0]));
 ?>
