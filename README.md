@@ -56,6 +56,12 @@ $pq->query(...);
 <li> two</li>
 <li> three</li>
 </ul>
+<p id="my-id">Hello 2</p>
+<div id="pp1">
+	<div id="pp2">
+		<p>oooo</p>
+	</div>
+</div>
 </body>
 </html>
 ```
@@ -135,6 +141,11 @@ var_dump($pq->innerHTML($pq->query('.Opin')[0]));
 echo '<br><br>';
 var_dump($pq->outerHTML($pq->query('.dav-k')[0]));
 
+echo '<br><br>';
+var_dump($pq->query('#my-id')[0]->textContent);
+
+echo '<br><br>';
+var_dump($pq->query('#pp1 >  #pp2')[0]->textContent);
 ?>
 ```
 
@@ -172,5 +183,12 @@ object(DOMElement)#7 (18) { ["tagName"]=> string(1) "p" ["schemaTypeInfo"]=> NUL
 string(10) "<p>bar</p>"
 
 string(28) "<div class="dav-k">foo</div>"
+
+string(7) "Hello 2"
+
+
+string(16) "
+                <p>oooo</p>
+        "
 ```
 
