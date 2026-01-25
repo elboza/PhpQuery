@@ -7,8 +7,8 @@ class PhpQuery{
 
 	}
 	private function preprocess($str){
-		$list=explode(' ',$str);
-		return $list;
+		$str = str_replace('>', ' > ', $str);
+		return preg_split('/\s+/', trim($str));
 	}
 	private function get_tag($str){
 		if(preg_match('/^[\w-]+/',$str,$matches)){
@@ -54,7 +54,7 @@ class PhpQuery{
 		$arr=array();
 		if(empty($class)) return '';
 		foreach($class as $a){
-			array_push($arr,"contains(concat(' ', normalize-space(@class), ' '), ' ${a} ')");
+			array_push($arr,"contains(concat(' ', normalize-space(@class), ' '), ' {$a} ')");
 		}
 		return "[" . implode(" and ",$arr) . "]";
 	}
@@ -83,13 +83,23 @@ class PhpQuery{
 		$xpath=null;
 		$doc=null;
 	}
-	public function j_to_x($str,$b_rel=false){
-		$arr=array();
-		foreach($this->preprocess($str) as $a){
-			array_push($arr,$this->to_xpath($this->parse_item($a)));
+	public function j_to_x($str, $b_rel = false) {
+		$tokens = $this->preprocess($str);
+		$xpath = '';
+		$separator = $b_rel ? '' : '//';
+
+		foreach ($tokens as $token) {
+			if ($token === '>') {
+				$separator = '/';
+				continue;
+			}
+
+			$xpath .= $separator . $this->to_xpath($this->parse_item($token));
+
+			$separator = '//';
 		}
-		if($b_rel==false) $rel_str='//'; else $rel_str='';
-		return $rel_str . implode("/",$arr);
+
+		return $xpath;
 	}
 	public function query($str,$relative_node=null){
 		if($relative_node!=null) $b_rel=true; else $b_rel=false;
