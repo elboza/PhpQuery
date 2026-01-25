@@ -11,14 +11,14 @@ class PhpQuery{
 		return $list;
 	}
 	private function get_tag($str){
-		if(preg_match('/^\w+/',$str,$matches)){
+		if(preg_match('/^[\w-]+/',$str,$matches)){
 			return $matches[0];
 		}else{
 			return '*';
 		}
 	}
 	private function get_id($str){
-		if(preg_match('/#\w+/',$str,$matches)){
+		if(preg_match('/#[\w-]+/',$str,$matches)){
 			return substr($matches[0],1);
 		}
 		return '';
@@ -30,7 +30,7 @@ class PhpQuery{
 		return array();
 	}
 	private function get_autotags($str){
-		if(preg_match_all('/(?<=\[)\w+=?[\"\']?\w+[\"\']?(?=\])/',$str,$matches)){
+		if(preg_match_all('/(?<=\[)[\w-]+=?[\"\']?[\w-]+[\"\']?(?=\])/',$str,$matches)){
 			return $matches[0];
 		}
 		return array();
