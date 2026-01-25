@@ -71,4 +71,10 @@ var_dump($pq->innerHTML($pq->query('.Opin')[0]));
 
 echo '<br><br>';
 var_dump($pq->outerHTML($pq->query('.dav-k')[0]));
+
+echo '<br><br>';
+var_dump($pq->query('#my-id')[0]->textContent);
+
+echo '<br><br>';
+var_dump($pq->query('#pp1 >  #pp2')[0]->textContent);
 ?>
