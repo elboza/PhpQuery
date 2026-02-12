@@ -192,4 +192,22 @@ string(16) "
         "
 ```
 
+### licence: L-Beerware
+
+The L-Beerware license
+PREAMBLE:
+L-Beerware (also known as LBeerware or lbeerware) is a lesser Beerware license originally written by Poul-Henning Kamp.
+
+LICENSE:
+
+```
+/*
+ * ----------------------------------------------------------------------------
+ * "THE L-BEERWARE LICENSE" (Revision 48):
+ * This stuff comes with NO WARRANTY. As long as you retain this notice you
+ * can do whatever you want with this stuff. If we meet some day, and you think
+ * this stuff is worth it, you can buy the author a beer in return.
+ * ----------------------------------------------------------------------------
+ */
+ ```
 
